@@ -1,0 +1,40 @@
+.editContactContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    background-color: rgb(255 87 227 / 50%);
+    width: 30%;
+    height: 500px;
+    margin-top: 50px;
+}
+.inputOfEditContact{
+    width: 75%;
+    height: 5vh;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+.tittleOfEditContact{
+    margin-bottom: 50px;
+    color: white;
+}
+.buttonEditContact{
+    margin-top: 50px;
+    background-color: white;
+    color: rgb(255, 87, 227);
+    border: none;
+}
+.fa-arrow-left{
+    font-size: 5vh;
+    background: none;
+    background: linear-gradient(white, red);
+    font-size: 4rem;
+    line-height: 115%;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
+.LinkToArrow {
+    background: none;
+    max-width: 500px;
+}
