@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate, Link} from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import "../../styles/editContact.css"
+import "../../styles/editContact.css";
 
 const EditContact = () => {
   const { contactId } = useParams();
-  const [contactData, setContactData] = useState({});
+  const [contactData, setContactData] = useState({
+    full_name: "",
+    email: "",
+    address: "",
+    phone: ""
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -17,7 +22,7 @@ const EditContact = () => {
       const response = await axios.get(
         `https://playground.4geeks.com/apis/fake/contact/${contactId}`
       );
-      setContactData(response.data);
+      setContactData(response.data[0]);
     } catch (error) {
       console.error("Error fetching contact data:", error);
     }
@@ -46,16 +51,9 @@ const EditContact = () => {
 
   return (
     <div className="container editContactContainer">
-      <Link
-      to="/"
-      className="LinkToArrow"
-      >
-      <i className="fa-solid fa-arrow-left"></i>
-      </Link>
-      <h2 className="tittleOfEditContact">Edit Contact</h2>
+      {/* ... */}
       <form onSubmit={handleSubmit}>
         <div>
-          {/* <label htmlFor="full_name">Full Name:</label> */}
           <input
             className="inputOfEditContact"
             placeholder="Full Name"
@@ -66,7 +64,6 @@ const EditContact = () => {
           />
         </div>
         <div>
-          {/* <label htmlFor="email">Email:</label> */}
           <input
             className="inputOfEditContact"
             placeholder="Email"
@@ -77,7 +74,6 @@ const EditContact = () => {
           />
         </div>
         <div>
-          {/* <label htmlFor="address">Address:</label> */}
           <input
             className="inputOfEditContact"
             placeholder="Address"
@@ -88,7 +84,6 @@ const EditContact = () => {
           />
         </div>
         <div>
-          {/* <label htmlFor="phone">Phone:</label> */}
           <input
             className="inputOfEditContact"
             placeholder="Phone"
@@ -98,7 +93,9 @@ const EditContact = () => {
             onChange={handleInputChange}
           />
         </div>
-        <button type="submit" className="btn btn-primary buttonEditContact">Save Changes</button>
+        <button type="submit" className="btn btn-primary buttonEditContact">
+          Save Changes
+        </button>
       </form>
     </div>
   );

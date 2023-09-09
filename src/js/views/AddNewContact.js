@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "../../styles/AddNewContact.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const AddNewContact = ({ handleAddContact, history }) => {
+const AddNewContact = ({ handleAddContact }) => {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
+  const navigate = useNavigate();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,8 +27,11 @@ const AddNewContact = ({ handleAddContact, history }) => {
         "https://playground.4geeks.com/apis/fake/contact/",
         newContact
       );
-      handleAddContact();
-      history.push("/");
+      
+      if (typeof handleAddContact === "function") {
+        handleAddContact();
+      }
+      navigate("/");
     } catch (error) {
       console.error("Error adding contact:", error);
     }
@@ -35,15 +40,14 @@ const AddNewContact = ({ handleAddContact, history }) => {
   return (
     <div className="container AddNewContactContainer">
       <Link
-      to="/"
-      className="LinkToArrow"
+        to="/"
+        className="LinkToArrow"
       >
-      <i className="fa-solid fa-arrow-left"></i>
+        <i className="fa-solid fa-arrow-left"></i>
       </Link>
       <h2 className="tittleOfAddNewContact">Add a New Contact</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          {/* <label>Full Name</label> */}
           <input
             className="inputOfAddNewContact"
             placeholder="Full Name"
@@ -54,7 +58,6 @@ const AddNewContact = ({ handleAddContact, history }) => {
           />
         </div>
         <div className="form-group">
-          {/* <label>Email</label> */}
           <input
             className="inputOfAddNewContact"
             placeholder="Email"
@@ -65,7 +68,6 @@ const AddNewContact = ({ handleAddContact, history }) => {
           />
         </div>
         <div className="form-group">
-          {/* <label>Address</label> */}
           <input
             className="inputOfAddNewContact"
             placeholder="Address"
@@ -76,7 +78,6 @@ const AddNewContact = ({ handleAddContact, history }) => {
           />
         </div>
         <div className="form-group">
-          {/* <label>Phone</label> */}
           <input
             className="inputOfAddNewContact"
             placeholder="Phone"
@@ -86,9 +87,9 @@ const AddNewContact = ({ handleAddContact, history }) => {
             required
           />
         </div>
-        <Link to="/" className="btn btn-primary AddNewContactButton" onClick={handleSubmit}>
+        <button className="btn btn-primary AddNewContactButton" onClick={handleSubmit}>
           Add Contact
-        </Link>
+        </button>
       </form>
     </div>
   );
